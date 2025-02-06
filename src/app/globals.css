@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -64,12 +63,28 @@ body {
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
+    scrollbar-color: hsl(var(--secondary)) transparent;
+    scrollbar-width: thin;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  input {
+    &::placeholder {
+      @apply transition-[opacity] duration-200;
+    }
+
+    &:focus::placeholder {
+      @apply opacity-0;
+    }
   }
 }
