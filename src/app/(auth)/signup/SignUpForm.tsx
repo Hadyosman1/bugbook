@@ -1,24 +1,22 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, SignUpValues } from "@/lib/validations/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import LoadingButton from "@/components/ui/loading-button";
+import PasswordInput from "@/components/ui/password-input";
 import { useState, useTransition } from "react";
 import { signUp } from "./actions";
-import PasswordInput from "@/components/ui/password-input";
-import LoadingButton from "@/components/ui/loading-button";
 
 const SignUpForm = () => {
   const [error, setError] = useState<string>("");
