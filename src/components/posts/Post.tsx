@@ -8,9 +8,8 @@ interface PostProps {
 }
 
 const Post = ({ post: { content, createdAt, id, user } }: PostProps) => {
-  
   return (
-    <article className="flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm">
+    <article className="space-y-3 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex flex-wrap items-center gap-3">
         <Link href={`/users/${user.username}`}>
           <UserAvatar

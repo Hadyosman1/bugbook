@@ -1,12 +1,15 @@
-import Link from "next/link";
+import { Suspense } from "react";
 import { Button } from "./ui/button";
-import { validateRequest } from "@/auth";
+import Link from "next/link";
+import UserAvatar from "./UserAvatar";
+
 import { prisma } from "@/lib/prisma";
+
+import { Loader2 } from "lucide-react";
+
+import { validateRequest } from "@/auth";
 import { userDataSelect } from "@/lib/types";
 import { cn, formatNumber } from "@/lib/utils";
-import UserAvatar from "./UserAvatar";
-import { Suspense } from "react";
-import { Loader2 } from "lucide-react";
 import { unstable_cache } from "next/cache";
 
 interface TrendsSideBarProps {

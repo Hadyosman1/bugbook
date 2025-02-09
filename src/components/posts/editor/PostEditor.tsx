@@ -6,15 +6,17 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { useSession } from "@/app/(main)/SessionProvider";
 import UserAvatar from "@/components/UserAvatar";
-import { Button } from "@/components/ui/button";
 
-import { SubmitPost } from "./actions";
 
+import LoadingButton from "@/components/ui/loading-button";
 import { SendIcon } from "lucide-react";
+import { usePostMutation } from "./mutations";
 import "./styles.css";
 
 const PostEditor = () => {
   const { user } = useSession();
+
+  const postMutation = usePostMutation();
 
   const editor = useEditor({
     extensions: [
@@ -31,13 +33,12 @@ const PostEditor = () => {
       blockSeparator: "\n",
     }) || "";
 
-  const handleSubmit = async () => {
-    try {
-      await SubmitPost(input);
-    } catch (error) {
-      console.error(error);
-    }
-    editor?.commands?.clearContent();
+  const handleSubmit = () => {
+    postMutation.mutate(input, {
+      onSuccess: () => {
+        editor?.commands?.clearContent();
+      },
+    });
   };
 
   return (
@@ -57,7 +58,8 @@ const PostEditor = () => {
         />
       </div>
       <div className="flex justify-end">
-        <Button
+        <LoadingButton
+          isLoading={postMutation.isPending}
           onClick={() => {
             if (!input.trim()) return editor?.commands.focus();
             handleSubmit();
@@ -65,7 +67,7 @@ const PostEditor = () => {
           className="min-w-24 gap-1.5"
         >
           Post <SendIcon />
-        </Button>
+        </LoadingButton>
       </div>
     </div>
   );

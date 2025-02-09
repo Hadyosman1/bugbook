@@ -25,6 +25,7 @@ import {
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UserButtonProps {
   className?: string;
@@ -34,6 +35,8 @@ const UserButton = ({ className }: UserButtonProps) => {
   const { user } = useSession();
 
   const { setTheme, resolvedTheme, theme: currentTheme } = useTheme();
+
+  const queryClient = useQueryClient();
 
   const themesMap = {
     light: { Icon: SunIcon, label: "light" },
@@ -85,6 +88,7 @@ const UserButton = ({ className }: UserButtonProps) => {
 
         <DropdownMenuItem
           onClick={() => {
+            queryClient.clear();
             logout();
           }}
           className="cursor-pointer"
