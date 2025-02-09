@@ -11,7 +11,7 @@ import { type NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   // Mock posts creation
   // await prisma.post.createMany({ data: MockPosts });
-  await new Promise((r) => setTimeout(r, 5000));
+  // await new Promise((r) => setTimeout(r, 5000));
 
   try {
     const cursor = req.nextUrl.searchParams.get("cursor") || undefined;

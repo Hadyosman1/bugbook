@@ -8,7 +8,7 @@ import { submitPost } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { PostsPage } from "@/lib/types";
 
-export const usePostMutation = () => {
+export const useSubmitPostMutation = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 

@@ -7,16 +7,15 @@ import StarterKit from "@tiptap/starter-kit";
 import { useSession } from "@/app/(main)/SessionProvider";
 import UserAvatar from "@/components/UserAvatar";
 
-
 import LoadingButton from "@/components/ui/loading-button";
 import { SendIcon } from "lucide-react";
-import { usePostMutation } from "./mutations";
+import { useSubmitPostMutation } from "./mutations";
 import "./styles.css";
 
 const PostEditor = () => {
   const { user } = useSession();
 
-  const postMutation = usePostMutation();
+  const submitPostMutation = useSubmitPostMutation();
 
   const editor = useEditor({
     extensions: [
@@ -34,7 +33,7 @@ const PostEditor = () => {
     }) || "";
 
   const handleSubmit = () => {
-    postMutation.mutate(input, {
+    submitPostMutation.mutate(input, {
       onSuccess: () => {
         editor?.commands?.clearContent();
       },
@@ -59,7 +58,7 @@ const PostEditor = () => {
       </div>
       <div className="flex justify-end">
         <LoadingButton
-          isLoading={postMutation.isPending}
+          isLoading={submitPostMutation.isPending}
           onClick={() => {
             if (!input.trim()) return editor?.commands.focus();
             handleSubmit();
