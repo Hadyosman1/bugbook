@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 import { Button, ButtonProps } from "./button";
 
 interface LoadingButtonProps extends ButtonProps {
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 const LoadingButton = ({
