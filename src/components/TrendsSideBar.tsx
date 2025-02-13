@@ -1,16 +1,13 @@
-import { Suspense } from "react";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { Suspense } from "react";
 import UserAvatar from "./UserAvatar";
-
 import { prisma } from "@/lib/prisma";
-
 import { Loader2 } from "lucide-react";
-
 import { validateRequest } from "@/auth";
-import { userDataSelect } from "@/lib/types";
 import { cn, formatNumber } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
+import FollowButton from "./FollowButton";
+import { getUserDataSelect } from "@/lib/types";
 
 interface TrendsSideBarProps {
   className?: string;
@@ -44,15 +41,20 @@ const WhoToFollow = async () => {
       NOT: {
         id: user.id,
       },
+      followers: {
+        none: {
+          followerId: user.id,
+        },
+      },
     },
-    select: userDataSelect,
+    select: getUserDataSelect(user.id),
     take: 5,
   });
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
       <h2 className="text-lg font-medium">Who to follow</h2>
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {usersToFollow.map((user) => (
           <li key={user.id} className="flex items-center justify-between gap-2">
             <Link
@@ -76,7 +78,15 @@ const WhoToFollow = async () => {
                 </div>
               </div>
             </Link>
-            <Button size="sm">Follow</Button>
+            <FollowButton
+              userId={user.id}
+              initialState={{
+                followers: user._count.followers,
+                isFollowedByUser: user.followers.some(
+                  ({ followerId }) => followerId === user.id,
+                ),
+              }}
+            />
           </li>
         ))}
       </ul>
