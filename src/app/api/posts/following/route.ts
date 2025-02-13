@@ -1,18 +1,9 @@
 import { validateRequest } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { getPostDataInclude, PostsPage } from "@/lib/types";
-import { type NextRequest } from "next/server";
-
-// const MockPosts = Array.from({ length: 30 }).map((_, i) => ({
-//   userId: "u2hisrzpo2p4b4jh",
-//   content: `This is a post number ${i + 1}`,
-// }));
+import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  // Mock posts creation
-  // await prisma.post.createMany({ data: MockPosts });
-  // await new Promise((r) => setTimeout(r, 5000));
-
   try {
     const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
 
@@ -20,13 +11,24 @@ export async function GET(req: NextRequest) {
 
     const { user } = await validateRequest();
 
-    if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
+    if (!user) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const posts = await prisma.post.findMany({
-      include: getPostDataInclude(user.id),
+      where: {
+        user: {
+          followers: {
+            some: {
+              followerId: user.id,
+            },
+          },
+        },
+      },
       orderBy: { createdAt: "desc" },
       take: PAGE_SIZE + 1,
       cursor: cursor ? { id: cursor } : undefined,
+      include: getPostDataInclude(user.id),
     });
 
     const nextCursor = posts.length > PAGE_SIZE ? posts[PAGE_SIZE].id : null;
@@ -36,7 +38,7 @@ export async function GET(req: NextRequest) {
       nextCursor: nextCursor,
     };
 
-    return Response.json(data, { status: 200 });
+    return Response.json(data);
   } catch (error) {
     console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });

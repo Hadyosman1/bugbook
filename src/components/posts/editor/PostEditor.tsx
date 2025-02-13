@@ -63,7 +63,7 @@ const PostEditor = () => {
             if (!input.trim()) return editor?.commands.focus();
             handleSubmit();
           }}
-          className="min-w-24 gap-1.5"
+          className="min-w-20 gap-1.5"
         >
           Post <SendIcon />
         </LoadingButton>
