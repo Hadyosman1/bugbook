@@ -4,7 +4,7 @@ import SearchField from "@/components/SearchField";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-10 bg-card shadow-sm">
+    <header className="sticky top-0 z-10 bg-card shadow">
       <div className="container flex flex-wrap items-center justify-center gap-x-5 gap-y-3 py-3 md:justify-between">
         <Link
           href="/"
@@ -15,7 +15,7 @@ const Header = () => {
 
         <SearchField
           placeholder="search..."
-          className="max-w-xs transition-[flex] max-sm:w-52 duration-500 has-[input:focus]:grow"
+          className="max-w-xs transition-[flex] duration-500 has-[input:focus]:grow max-sm:w-52"
         />
 
         <UserButton className="shrink-0 sm:ms-auto" />

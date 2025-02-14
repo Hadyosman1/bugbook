@@ -35,7 +35,7 @@ const SearchField = ({ className, ...props }: SearchFieldProps) => {
         id={id}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="pe-8"
+        className="rounded-xl bg-background pe-8"
         name="q"
       />
       <label
