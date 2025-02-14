@@ -4,16 +4,15 @@ import { FollowerInfo } from "@/lib/types";
 import { NextRequest } from "next/server";
 
 interface RequestParams {
-  params: {
+  params: Promise<{
     userId: string;
-  };
+  }>;
 }
 
-export async function GET(
-  _: NextRequest,
-  { params: { userId } }: RequestParams,
-) {
+export async function GET(_: NextRequest, { params }: RequestParams) {
   try {
+    const userId = (await params).userId;
+
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {
@@ -53,11 +52,10 @@ export async function GET(
   }
 }
 
-export async function POST(
-  _: NextRequest,
-  { params: { userId } }: RequestParams,
-) {
+export async function POST(_: NextRequest, { params }: RequestParams) {
   try {
+    const userId = (await params).userId;
+
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {
@@ -85,11 +83,10 @@ export async function POST(
   }
 }
 
-export async function DELETE(
-  _: NextRequest,
-  { params: { userId } }: RequestParams,
-) {
+export async function DELETE(_: NextRequest, { params }: RequestParams) {
   try {
+    const userId = (await params).userId;
+
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {
