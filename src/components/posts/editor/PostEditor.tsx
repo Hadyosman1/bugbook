@@ -44,10 +44,8 @@ const PostEditor = () => {
     <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex gap-5">
         <UserAvatar
-          username={user.username}
-          displayName={user.displayName}
           avatarUrl={user.avatarUrl}
-          className="hidden sm:inline"
+          className="hidden shrink-0 self-start sm:inline"
         />
         <EditorContent
           editor={editor}
