@@ -8,6 +8,7 @@ import { cn, formatNumber } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 import FollowButton from "./FollowButton";
 import { getUserDataSelect } from "@/lib/types";
+import UserTooltip from "./UserTooltip";
 
 interface TrendsSideBarProps {
   className?: string;
@@ -57,27 +58,25 @@ const WhoToFollow = async () => {
       <ul className="space-y-3">
         {usersToFollow.map((user) => (
           <li key={user.id} className="flex items-center justify-between gap-2">
-            <Link
-              href={`/users/${user.username}`}
-              className="flex items-center gap-3"
-            >
-              <UserAvatar
-                className="flex-none"
-                avatarUrl={user.avatarUrl}
-                username={user.username}
-                displayName={user.displayName}
-              />
-              <div className="flex flex-col">
-                <div className="text-sm font-medium text-foreground">
-                  <p className="line-clamp-1 break-all font-semibold hover:underline">
-                    {user.displayName}
-                  </p>
-                  <p className="line-clamp-1 break-all text-muted-foreground">
-                    @{user.username}
-                  </p>
+            <UserTooltip user={user}>
+              <Link
+                href={`/users/${user.username}`}
+                className="flex items-center gap-3"
+              >
+                <UserAvatar className="flex-none" avatarUrl={user.avatarUrl} />
+                <div className="flex flex-col">
+                  <div className="text-sm font-medium text-foreground">
+                    <p className="line-clamp-1 break-all font-semibold hover:underline">
+                      {user.displayName}
+                    </p>
+                    <p className="line-clamp-1 break-all text-muted-foreground">
+                      @{user.username}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </UserTooltip>
+
             <FollowButton
               userId={user.id}
               initialState={{

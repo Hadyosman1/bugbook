@@ -48,11 +48,7 @@ const UserButton = ({ className }: UserButtonProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={cn("rounded-full", className)}>
-          <UserAvatar
-            username={user.username}
-            displayName={user.displayName}
-            avatarUrl={user.avatarUrl}
-          />
+          <UserAvatar avatarUrl={user.avatarUrl} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

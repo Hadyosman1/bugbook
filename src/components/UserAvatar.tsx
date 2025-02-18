@@ -1,25 +1,24 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { User } from "lucia";
+import Image from "next/image";
 
-interface UserAvatarProps
-  extends Pick<User, "avatarUrl" | "username" | "displayName"> {
+interface UserAvatarProps extends Pick<User, "avatarUrl"> {
   className?: string;
+  size?: number;
 }
 
-const UserAvatar = ({
-  avatarUrl,
-  displayName,
-  username,
-  className,
-}: UserAvatarProps) => {
+const UserAvatar = ({ avatarUrl, className, size }: UserAvatarProps) => {
   return (
-    <Avatar className={cn(className)}>
-      <AvatarImage src={avatarUrl ?? ""} />
-      <AvatarFallback>
-        {(displayName?.[0] || username?.[0])?.toUpperCase()}
-      </AvatarFallback>
-    </Avatar>
+    <Image
+      src={avatarUrl || "/avatar-placeholder.png"}
+      alt={`user avatar`}
+      width={size ?? 48}
+      height={size ?? 48}
+      className={cn(
+        "aspect-square rounded-full border border-border/50 object-cover shadow",
+        className,
+      )}
+    />
   );
 };
 
