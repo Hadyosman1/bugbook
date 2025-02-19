@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-const requiredString = z.string().trim().min(1, "required");
+import { requiredString } from ".";
 
 export const signUpSchema = z.object({
   email: requiredString.email("Invalid email address").toLowerCase(),
