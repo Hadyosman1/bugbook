@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import FollowButton from "@/components/FollowButton";
 import UserPosts from "./UserPosts";
 import Linkify from "@/components/Linkify";
+import EditProfileButton from "./EditProfileButton";
 
 interface UserProfilePageProps {
   params: Promise<{ username: string }>;
@@ -125,7 +126,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
             </div>
           </div>
           {user.id === loggedInUserId ? (
-            <Button>Edit profile</Button>
+            <EditProfileButton user={user} />
           ) : (
             <FollowButton userId={user.id} initialState={followerInfo} />
           )}
