@@ -19,7 +19,7 @@ const Layout = async ({
         <Header />
 
         <div className="container relative flex grow gap-5 pb-16 pt-8">
-          <MenuBar className="sticky top-20 hidden h-fit shrink-0 flex-col space-y-2 rounded-lg bg-card px-3 py-5 shadow-sm sm:flex lg:p-5 xl:w-56" />
+          <MenuBar className="sticky top-20 hidden h-fit shrink-0 flex-col space-y-2 rounded-2xl bg-card px-3 py-5 shadow-sm sm:flex lg:p-5 xl:w-56" />
           {children}
         </div>
 
