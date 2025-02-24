@@ -10,7 +10,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
 import { ImageIcon, Loader2, SendIcon, XIcon } from "lucide-react";
-import { ClipboardEvent, useRef } from "react";
+import { ClipboardEvent, memo, useRef } from "react";
 import { useSubmitPostMutation } from "./mutations";
 import "./styles.css";
 import useMediaUpload, { Attachment } from "./useMediaUpload";
@@ -181,27 +181,29 @@ interface AttachmentPreviewsProps {
   removeAttachment: (fileName: string) => void;
 }
 
-const AttachmentPreviews = ({
-  attachments,
-  removeAttachment,
-}: AttachmentPreviewsProps) => {
-  return (
-    <div
-      className={cn(
-        "flex flex-col gap-3",
-        attachments.length > 1 && "sm:grid sm:grid-cols-2",
-      )}
-    >
-      {attachments.map((att) => (
-        <AttachmentPreview
-          key={att.file.name}
-          attachment={att}
-          onRemoveClick={() => removeAttachment(att.file.name)}
-        />
-      ))}
-    </div>
-  );
-};
+const AttachmentPreviews = memo(
+  ({ attachments, removeAttachment }: AttachmentPreviewsProps) => {
+    return (
+      <div
+        className={cn(
+          "flex flex-col gap-3",
+          attachments.length > 1 &&
+            "*:mb-3 sm:block sm:columns-2 sm:*:h-full sm:*:w-full",
+        )}
+      >
+        {attachments.map((att) => (
+          <AttachmentPreview
+            key={att.file.name}
+            attachment={att}
+            onRemoveClick={() => removeAttachment(att.file.name)}
+          />
+        ))}
+      </div>
+    );
+  },
+);
+
+AttachmentPreviews.displayName = "AttachmentPreviews";
 
 interface AttachmentPreviewProps {
   attachment: Attachment;

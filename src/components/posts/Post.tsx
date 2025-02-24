@@ -11,6 +11,7 @@ import UserTooltip from "../UserTooltip";
 import { Media } from "@prisma/client";
 import Image from "next/image";
 import LikeButton from "./LikeButton";
+import BookmarkButton from "./BookmarkButton";
 
 interface PostProps {
   post: PostData;
@@ -66,13 +67,23 @@ const Post = ({ post }: PostProps) => {
 
       <hr className="text-muted-foreground" />
 
-      <LikeButton
-        postId={post.id}
-        initialState={{
-          likes: post._count.likes,
-          isLikedByUser: post.likes.some((l) => l.userId === currentUser.id),
-        }}
-      />
+      <div className="flex items-center justify-between gap-5 pt-1">
+        <LikeButton
+          postId={post.id}
+          initialState={{
+            likes: post._count.likes,
+            isLikedByUser: post.likes.some((l) => l.userId === currentUser.id),
+          }}
+        />
+        <BookmarkButton
+          postId={post.id}
+          initialState={{
+            isBookmarkedByUser: post.bookmarks.some(
+              (b) => b.userId === currentUser.id,
+            ),
+          }}
+        />
+      </div>
     </article>
   );
 };
@@ -88,7 +99,8 @@ const MediaPreviews = ({ attachments }: MediaPreviewsProps) => {
     <div
       className={cn(
         "flex flex-col gap-3",
-        attachments.length > 1 && "items-center sm:grid sm:grid-cols-2",
+        attachments.length > 1 &&
+          "*:mb-3 sm:*:h-full sm:*:w-full sm:block sm:columns-2",
       )}
     >
       {attachments.map((a) => (
@@ -117,10 +129,10 @@ const MediaPreview = ({ media }: MediaPreviewProps) => {
 
   if (media.type === "VIDEO") {
     return (
-      <div className="grid place-items-center rounded-2xl bg-secondary/70 shadow">
+      <div className="rounded-2xl bg-secondary/70 shadow">
         <video
           controls
-          className="mx-auto aspect-video size-fit max-h-[30rem] rounded-xl"
+          className="aspect-video size-fit max-h-[30rem] w-full rounded-xl"
         >
           <source src={media.url} />
         </video>
