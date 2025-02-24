@@ -54,7 +54,7 @@ const UserButton = ({ className }: UserButtonProps) => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href={`users/${user.username}`}>
+        <Link href={`/users/${user.username}`}>
           <DropdownMenuItem className="cursor-pointer">
             <UserIcon /> Profile
           </DropdownMenuItem>
