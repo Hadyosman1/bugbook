@@ -8,14 +8,13 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 
 import avatarPlaceholder from "@/../public/avatar-placeholder.png";
-import { formatDate } from "date-fns";
-import { formatNumber } from "@/lib/utils";
-import FollowerCount from "@/components/FollowerCount";
-import { Button } from "@/components/ui/button";
 import FollowButton from "@/components/FollowButton";
-import UserPosts from "./UserPosts";
+import FollowerCount from "@/components/FollowerCount";
 import Linkify from "@/components/Linkify";
+import { formatNumber } from "@/lib/utils";
+import { formatDate } from "date-fns";
 import EditProfileButton from "./EditProfileButton";
+import UserPosts from "./UserPosts";
 
 interface UserProfilePageProps {
   params: Promise<{ username: string }>;
