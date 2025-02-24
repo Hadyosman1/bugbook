@@ -1,6 +1,6 @@
 import { useToast } from "@/hooks/use-toast";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export interface Attachment {
   file: File;
@@ -76,9 +76,9 @@ const useMediaUpload = () => {
     startUpload(files);
   };
 
-  const removeAttachment = (fileName: string) => {
+  const removeAttachment = useCallback((fileName: string) => {
     setAttachments((prev) => prev.filter((a) => a.file.name !== fileName));
-  };
+  }, []);
 
   const reset = () => {
     setAttachments([]);
