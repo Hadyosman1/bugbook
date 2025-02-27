@@ -63,7 +63,7 @@ const BookmarkButton = ({ initialState, postId }: BookmarkButtonProps) => {
   });
 
   return (
-    <button onClick={() => mutate()} className="flex items-center gap-2">
+    <button onClick={() => mutate()} title="Bookmark button">
       <BookmarkIcon
         className={cn(
           "size-5",

@@ -18,7 +18,7 @@ const TrendsSideBar = ({ className }: TrendsSideBarProps) => {
   return (
     <aside
       className={cn(
-        "sticky top-20 hidden h-fit w-72 min-w-60 max-w-xs flex-none space-y-4 md:block lg:w-80",
+        "sticky top-20 hidden h-fit w-72 overflow-y-auto max-h-[80svh] pb-10 [scrollbar-width:none] min-w-60 max-w-xs flex-none space-y-4 md:block ",
         className,
       )}
     >
@@ -53,7 +53,7 @@ const WhoToFollow = async () => {
   });
 
   return (
-    <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
+    <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm dark:border">
       <h2 className="text-lg font-medium">Who to follow</h2>
       <ul className="space-y-3">
         {usersToFollow.map((user) => (
@@ -118,10 +118,10 @@ const TrendingTopics = async () => {
   const trendingTopics = await getTrendingTopics();
 
   return (
-    <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
+    <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm dark:border">
       <h2 className="text-lg font-medium">Trending topics</h2>
 
-      <ul className="space-y-1.5">
+      <ul className="space-y-2.5">
         {trendingTopics.map(({ hashtag, count }) => {
           const title = hashtag.split("#")?.[1];
 
@@ -130,7 +130,7 @@ const TrendingTopics = async () => {
               <Link
                 title={title}
                 href={`/hashtag/${title}`}
-                className="flex items-center justify-between gap-1 text-sm text-primary hover:underline"
+                className="flex flex-col gap-1 text-sm text-primary hover:underline"
               >
                 <p className="line-clamp-1 break-all">{hashtag}</p>
                 <p className="text-xs text-muted-foreground">

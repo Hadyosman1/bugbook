@@ -1,17 +1,21 @@
 "use client";
 
-import { PostData } from "@/lib/types";
-import UserAvatar from "../UserAvatar";
-import Link from "next/link";
-import { cn, formatRelativeDate } from "@/lib/utils";
-import PostMoreButton from "./PostMoreButton";
 import { useSession } from "@/app/(main)/SessionProvider";
-import Linkify from "../Linkify";
-import UserTooltip from "../UserTooltip";
+import { PostData } from "@/lib/types";
+import { cn, formatRelativeDate } from "@/lib/utils";
 import { Media } from "@prisma/client";
+import { MessageSquareIcon } from "lucide-react";
 import Image from "next/image";
-import LikeButton from "./LikeButton";
+import Link from "next/link";
+import { useState } from "react";
+import Linkify from "../Linkify";
+import UserAvatar from "../UserAvatar";
+import UserTooltip from "../UserTooltip";
 import BookmarkButton from "./BookmarkButton";
+import LikeButton from "./LikeButton";
+import PostMoreButton from "./PostMoreButton";
+import Comments from "./comments/Comments";
+import { Button } from "../ui/button";
 
 interface PostProps {
   post: PostData;
@@ -22,8 +26,10 @@ const Post = ({ post }: PostProps) => {
 
   const { content, createdAt, id, user } = post;
 
+  const [showComments, setShowComment] = useState(false);
+
   return (
-    <article className="group space-y-3 rounded-2xl bg-card p-5 shadow-sm">
+    <article className="group space-y-3 rounded-2xl bg-card p-5 shadow-sm dark:border">
       <div className="flex flex-wrap items-center gap-3">
         <UserTooltip user={user}>
           <Link href={`/users/${user.username}`} className="rounded-full">
@@ -68,13 +74,21 @@ const Post = ({ post }: PostProps) => {
       <hr className="text-muted-foreground" />
 
       <div className="flex items-center justify-between gap-5 pt-1">
-        <LikeButton
-          postId={post.id}
-          initialState={{
-            likes: post._count.likes,
-            isLikedByUser: post.likes.some((l) => l.userId === currentUser.id),
-          }}
-        />
+        <div className="flex items-center gap-5">
+          <LikeButton
+            postId={post.id}
+            initialState={{
+              likes: post._count.likes,
+              isLikedByUser: post.likes.some(
+                (l) => l.userId === currentUser.id,
+              ),
+            }}
+          />
+          <CommentButton
+            post={post}
+            onClick={() => setShowComment((prev) => !prev)}
+          />
+        </div>
         <BookmarkButton
           postId={post.id}
           initialState={{
@@ -84,6 +98,7 @@ const Post = ({ post }: PostProps) => {
           }}
         />
       </div>
+      {showComments && <Comments post={post} />}
     </article>
   );
 };
@@ -100,7 +115,7 @@ const MediaPreviews = ({ attachments }: MediaPreviewsProps) => {
       className={cn(
         "flex flex-col gap-3",
         attachments.length > 1 &&
-          "*:mb-3 sm:*:h-full sm:*:w-full sm:block sm:columns-2",
+          "*:mb-3 sm:block sm:columns-2 sm:*:h-full sm:*:w-full",
       )}
     >
       {attachments.map((a) => (
@@ -141,4 +156,21 @@ const MediaPreview = ({ media }: MediaPreviewProps) => {
   }
 
   return <p className="text-destructive">Unsupported media type</p>;
+};
+
+interface CommentButtonProps {
+  post: PostData;
+  onClick: () => void;
+}
+
+const CommentButton = ({ post, onClick }: CommentButtonProps) => {
+  return (
+    <Button variant="ghost" size="sm" onClick={onClick}>
+      <MessageSquareIcon className="size-5" />
+      <span className="text-sm font-medium tabular-nums">
+        {post._count.comments}{" "}
+        <span className="hidden sm:inline">Comments</span>
+      </span>
+    </Button>
+  );
 };

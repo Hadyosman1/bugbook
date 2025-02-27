@@ -11,7 +11,7 @@ export default function Home() {
       <main className="grow space-y-5">
         <PostEditor />
         <Tabs defaultValue="for-you">
-          <TabsList className="mb-3 w-full bg-card">
+          <TabsList className="mb-3 w-full bg-card dark:border">
             <TabsTrigger value="for-you" className="grow">
               For you
             </TabsTrigger>

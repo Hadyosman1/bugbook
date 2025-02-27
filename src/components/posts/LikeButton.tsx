@@ -11,6 +11,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { HeartIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface LikeButtonProps {
   postId: string;
@@ -61,7 +62,12 @@ const LikeButton = ({ initialState, postId }: LikeButtonProps) => {
   });
 
   return (
-    <button onClick={() => mutate()} className="flex items-center gap-2">
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={() => mutate()}
+      className="flex items-center gap-2"
+    >
       <HeartIcon
         className={cn(
           "size-5",
@@ -74,7 +80,7 @@ const LikeButton = ({ initialState, postId }: LikeButtonProps) => {
           {data.likes > 1 ? "likes" : "likes"}
         </span>
       </span>
-    </button>
+    </Button>
   );
 };
 

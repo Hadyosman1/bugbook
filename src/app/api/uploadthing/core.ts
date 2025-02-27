@@ -62,7 +62,7 @@ export const fileRouter = {
         },
       });
 
-      return {mediaId:media.id}
+      return { mediaId: media.id };
     }),
 } satisfies FileRouter;
 
