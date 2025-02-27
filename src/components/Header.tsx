@@ -4,7 +4,7 @@ import SearchField from "@/components/SearchField";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-10 bg-card shadow">
+    <header className="sticky top-0 z-10 dark:border-b bg-card shadow">
       <div className="container flex flex-wrap items-center justify-center gap-x-5 gap-y-3 py-3 md:justify-between">
         <Link
           href="/"

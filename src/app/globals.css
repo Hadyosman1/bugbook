@@ -36,14 +36,15 @@ body {
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
 
-    --radius: 0.5rem;
+    --radius: 0.6rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 20 10% 4.5%;
     --foreground: 0 0% 95%;
 
-    --card: 24 9.8% 10%;
+    --card: 210 17% 8%;
+    /* --card: 24 9.8% 10%; */
     --card-foreground: 0 0% 95%;
 
     --popover: 0 0% 9%;
@@ -58,7 +59,7 @@ body {
     --muted: 0 0% 15%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 12 6.5% 15.1%;
+    --accent: 210 17% 15%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 50%;

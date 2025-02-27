@@ -77,7 +77,7 @@ const PostEditor = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
+    <div className="flex flex-col dark:border gap-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex gap-5">
         <UserAvatar
           avatarUrl={user.avatarUrl}
@@ -163,9 +163,9 @@ const AddAttachmentsButton = ({
         }}
       />
       <Button
-        variant="secondary"
+        variant="ghost"
         size="icon"
-        className="text-primary"
+        className="text-primary hover:text-primary/80"
         disabled={disabled}
         onClick={() => fileInputRef.current?.click()}
       >
