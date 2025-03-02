@@ -114,11 +114,11 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(react@19.0.0)
       stream-chat:
-        specifier: ^8.55.0
+        specifier: ^8.37.0
         version: 8.55.0
       stream-chat-react:
-        specifier: ^12.10.0
-        version: 12.10.0(@types/react@19.0.8)(jquery@3.7.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(stream-chat@8.55.0)
+        specifier: ^11.23.0
+        version: 11.24.1(@types/react@19.0.8)(jquery@3.7.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(stream-chat@8.55.0)(ws@7.5.10)
       tailwind-merge:
         specifier: ^3.0.1
         version: 3.0.1
@@ -190,6 +190,9 @@ packages:
 
   '@braintree/sanitize-url@6.0.4':
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
+
+  '@breezystack/lamejs@1.2.7':
+    resolution: {integrity: sha512-6wc7ck65ctA75Hq7FYHTtTvGnYs6msgdxiSUICQ+A01nVOWg6rqouZB8IdyteRlfpYYiFovkf67dIeOgWIUzTA==}
 
   '@effect/platform@0.72.0':
     resolution: {integrity: sha512-uHsW2hlo6AiIW3zpLAVAoNvJngS/JwCZBAM4RSRllm8JTgjjCraef78FJBDNnSXz+2a10Xzzx4qxVsP3s8EV5Q==}
@@ -3234,19 +3237,16 @@ packages:
   std-env@3.8.0:
     resolution: {integrity: sha512-Bc3YwwCB+OzldMxOXJIIvC6cPRWr/LxOp48CdQTOkPyk/t4JWWJbrilwBd7RJzKV8QW7tJkcgAmeuLLJugl5/w==}
 
-  stream-chat-react@12.10.0:
-    resolution: {integrity: sha512-eFCt2PqYl7BZ8HcHVzL1E/8OlrgPk96vv4LVL1z5CzOZ0dQhjGOYmchXIV1JEJJIj3octfRnHrN4N9aMwSZqUQ==}
+  stream-chat-react@11.24.1:
+    resolution: {integrity: sha512-irFd7fZCgTJ/j3b2cIH8I5DM+v6LrvupJdWz9dC3SdRQAdXKAGQhBXsvqg5//o1XGw1+FWdRuMn0g3qrTyL83w==}
     peerDependencies:
-      '@breezystack/lamejs': ^1.2.7
       '@emoji-mart/data': ^1.1.0
       '@emoji-mart/react': ^1.1.0
       emoji-mart: ^5.4.0
-      react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.8.0
-      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.8.0
-      stream-chat: ^8.50.0
+      react: ^18.0.0 || ^17.0.0 || ^16.8.0
+      react-dom: ^18.0.0 || ^17.0.0 || ^16.8.0
+      stream-chat: ^8.39.0
     peerDependenciesMeta:
-      '@breezystack/lamejs':
-        optional: true
       '@emoji-mart/data':
         optional: true
       '@emoji-mart/react':
@@ -3667,6 +3667,8 @@ snapshots:
       regenerator-runtime: 0.14.1
 
   '@braintree/sanitize-url@6.0.4': {}
+
+  '@breezystack/lamejs@1.2.7': {}
 
   '@effect/platform@0.72.0(effect@3.4.8)':
     dependencies:
@@ -7120,9 +7122,11 @@ snapshots:
 
   std-env@3.8.0: {}
 
-  stream-chat-react@12.10.0(@types/react@19.0.8)(jquery@3.7.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(stream-chat@8.55.0):
+  stream-chat-react@11.24.1(@types/react@19.0.8)(jquery@3.7.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(stream-chat@8.55.0)(ws@7.5.10):
     dependencies:
+      '@babel/runtime': 7.26.7
       '@braintree/sanitize-url': 6.0.4
+      '@breezystack/lamejs': 1.2.7
       '@popperjs/core': 2.11.8
       '@react-aria/focus': 3.19.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       clsx: 2.1.1
@@ -7131,6 +7135,7 @@ snapshots:
       fix-webm-duration: 1.0.6
       hast-util-find-and-replace: 5.0.1
       i18next: 21.10.0
+      isomorphic-ws: 4.0.1(ws@7.5.10)
       linkifyjs: 4.2.0
       lodash.debounce: 4.0.8
       lodash.defaultsdeep: 4.6.1
@@ -7144,6 +7149,7 @@ snapshots:
       react-dropzone: 14.3.5(react@19.0.0)
       react-fast-compare: 3.2.2
       react-image-gallery: 1.2.12(react@19.0.0)
+      react-is: 18.3.1
       react-markdown: 8.0.7(@types/react@19.0.8)(react@19.0.0)
       react-player: 2.10.1(react@19.0.0)
       react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -7155,7 +7161,6 @@ snapshots:
       tslib: 2.8.1
       unist-builder: 3.0.1
       unist-util-visit: 5.0.0
-      use-sync-external-store: 1.4.0(react@19.0.0)
     optionalDependencies:
       '@stream-io/transliterate': 1.5.5
       mml-react: 0.4.7(@types/react@19.0.8)(jquery@3.7.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -7163,6 +7168,7 @@ snapshots:
       - '@types/react'
       - jquery
       - supports-color
+      - ws
 
   stream-chat@8.55.0:
     dependencies:
