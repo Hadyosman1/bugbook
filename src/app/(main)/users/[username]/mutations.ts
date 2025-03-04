@@ -60,10 +60,7 @@ export const useUpdateProfileMutation = () => {
                     ...post,
                     user: {
                       ...updatedUser,
-                      avatarUrl: newAvatarUrl?.replace(
-                        "/f/",
-                        `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
-                      ) || updatedUser.avatarUrl,
+                      avatarUrl: newAvatarUrl || updatedUser.avatarUrl,
                     },
                   };
                 }
