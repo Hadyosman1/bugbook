@@ -46,7 +46,6 @@ body {
     --foreground: 0 0% 95%;
 
     --card: 210 17% 8%;
-    /* --card: 24 9.8% 10%; */
     --card-foreground: 0 0% 95%;
 
     --popover: 0 0% 9%;
@@ -76,7 +75,7 @@ body {
 @layer base {
   * {
     @apply border-border;
-    scrollbar-color: hsl(var(--card)) transparent;
+    scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--card) / 0.5);
     scrollbar-width: thin;
   }
 

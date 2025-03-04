@@ -18,7 +18,7 @@ const useMediaUpload = () => {
   const { startUpload, isUploading } = useUploadThing("attachment", {
     onBeforeUploadBegin: (files) => {
       const renamedFiles = files.map((f) => {
-        const extension = f.name.split(".").pop();
+        const extension = f.name.slice(f.name.lastIndexOf(".") + 1);
         return new File([f], `attachment_${crypto.randomUUID()}.${extension}`, {
           type: f.type,
         });
@@ -37,6 +37,8 @@ const useMediaUpload = () => {
         prev.map((a) => {
           const uploadResult = res.find((r) => r.name === a.file.name);
 
+          console.log(uploadResult, "upload result");
+
           if (!uploadResult) return a;
 
           return {
@@ -48,6 +50,7 @@ const useMediaUpload = () => {
       );
     },
     onUploadError: (e) => {
+      console.error(e);
       setAttachments((prev) => prev.filter((a) => !a.isUploading));
       toast({
         variant: "destructive",
@@ -56,7 +59,7 @@ const useMediaUpload = () => {
     },
   });
 
-  const handleStartUpload = (files: File[]) => {
+  const handleStartUpload = useCallback((files: File[]) => {
     if (isUploading) {
       toast({
         variant: "destructive",
@@ -74,16 +77,16 @@ const useMediaUpload = () => {
     }
 
     startUpload(files);
-  };
+  }, []);
 
   const removeAttachment = useCallback((fileName: string) => {
     setAttachments((prev) => prev.filter((a) => a.file.name !== fileName));
   }, []);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setAttachments([]);
     setUploadProgress(undefined);
-  };
+  }, []);
 
   return {
     startUpload: handleStartUpload,
